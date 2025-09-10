@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مبروك! أكملت اللعبة 🎉</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        .confetti {
+            font-size: 5rem;
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #ff6b6b;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background: #ffe0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="confetti">🎉🎉🎉</div>
+        <h1>مبروك!</h1>
+        <p>أكملت كل مراحل اللعبة بنجاح!</p>
+        <p>لقد مررت بـ 11 لونًا مختلفًا 🌈</p>
+        <a href="index.html" class="btn">🔄 العب من الأول</a>
+    </div>
+</body>
+</html>

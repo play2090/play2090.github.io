@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ابدأ اللعبة — صفحة 1</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        h1 { margin-bottom: 30px; font-size: 2rem; }
+        #colorDisplay {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 30px 0;
+            min-height: 60px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>الصفحة 1 من 11 — ابدأ اللعبة!</h1>
+        <div id="colorDisplay">اضغط على الزر!</div>
+        <button id="watchBtn">Watch</button>
+    </div>
+
+    <script>
+        const colors = [
+            "أحمر", "أزرق", "أخضر", "أصفر", "وردي", 
+            "بنفسجي", "برتقالي", "سماوي", "أسود", "أبيض",
+            "رمادي", "بني", "ذهبي", "فضي", "زيتوني"
+        ];
+
+        const watchBtn = document.getElementById('watchBtn');
+        const colorDisplay = document.getElementById('colorDisplay');
+
+        watchBtn.addEventListener('click', () => {
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            colorDisplay.textContent = randomColor;
+            document.body.style.background = getRandomGradient(randomColor);
+
+            setTimeout(() => {
+                window.location.href = "page6.html"; // 👉 الصفحة التانية
+            }, 1500);
+        });
+
+        function getRandomGradient(colorName) {
+            const gradients = {
+                "أحمر": "linear-gradient(135deg, #ff6b6b, #ee5a52)",
+                "أزرق": "linear-gradient(135deg, #4facfe, #00f2fe)",
+                "أخضر": "linear-gradient(135deg, #00b09b, #96c93d)",
+                "أصفر": "linear-gradient(135deg, #f093fb, #f5576c)",
+                "وردي": "linear-gradient(135deg, #fad0c4, #ff9a9e)",
+                "بنفسجي": "linear-gradient(135deg, #a18cd1, #fbc2eb)",
+                "default": "linear-gradient(135deg, #667eea, #764ba2)"
+            };
+            return gradients[colorName] || gradients["default"];
+        }
+    </script>
+</body>
+</html>
