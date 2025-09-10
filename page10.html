@@ -7,38 +7,75 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, sans-serif;
+            /* ✅ لون ثابت — أحمر ناري */
             background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
             color: white;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
         }
+
+        .ad-banner {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 8px 0;
+            background: rgba(0,0,0,0.05);
+            z-index: 10;
+            position: absolute;
+        }
+
+        .ad-banner.top {
+            top: 0;
+        }
+
+        .ad-banner.bottom {
+            bottom: 0;
+            padding: 15px 0;
+        }
+
+        /* نخلي البنرات متجاوبة */
+        .ad-banner iframe {
+            max-width: 95vw;
+            height: auto;
+        }
+
         .container {
             background: rgba(255, 255, 255, 0.1);
             padding: 40px;
             border-radius: 20px;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 5;
+            position: relative;
+            max-width: 90vw;
         }
+
         h1 {
             font-size: 3rem;
             margin-bottom: 20px;
         }
+
         p {
             font-size: 1.5rem;
             margin-bottom: 30px;
         }
+
         .confetti {
             font-size: 5rem;
             animation: bounce 1s infinite;
         }
+
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
         }
+
         .btn {
             display: inline-block;
             background: white;
@@ -48,13 +85,32 @@
             border-radius: 50px;
             font-weight: bold;
             margin-top: 20px;
+            transition: background 0.3s ease;
         }
+
         .btn:hover {
             background: #ffe0e0;
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
+
+    <!-- ⬆️ البنر العلوي — 60x468 -->
+    <div class="ad-banner top">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : 'a2725a2a9d0cd23fab4c37659ec2f836',
+                'format' : 'iframe',
+                'height' : 60,
+                'width' : 468,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/a2725a2a9d0cd23fab4c37659ec2f836/invoke.js"></script>
+    </div>
+
+    <!-- 💥 محتوى الصفحة — في المنتصف -->
     <div class="container">
         <div class="confetti">🎉🎉🎉</div>
         <h1>مبروك!</h1>
@@ -62,5 +118,20 @@
         <p>لقد مررت بـ 11 لونًا مختلفًا 🌈</p>
         <a href="index.html" class="btn">🔄 العب من الأول</a>
     </div>
+
+    <!-- ⬇️ البنر السفلي — 50x320 -->
+    <div class="ad-banner bottom">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : 'dab20a2977afc3f070a74646e5a7975f',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/dab20a2977afc3f070a74646e5a7975f/invoke.js"></script>
+    </div>
+
 </body>
 </html>
