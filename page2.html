@@ -3,26 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ابدأ اللعبة — صفحة 1</title>
+    <title>الصفحة 2 — اللون الثاني!</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2); /* لون افتراضي — هيتم تغييره */
             margin: 0;
             color: white;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            transition: background 0.5s ease;
         }
+
+        .ad-banner {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 8px 0;
+            background: rgba(0,0,0,0.05);
+            z-index: 10;
+            position: absolute;
+        }
+
+        .ad-banner.top {
+            top: 0;
+        }
+
+        .ad-banner.bottom {
+            bottom: 0;
+            padding: 15px 0;
+        }
+
+        /* نخلي البنر السفلي متجاوب لو كان كبير */
+        .ad-banner iframe {
+            max-width: 95vw;
+            width: 100%;
+            height: auto;
+        }
+
         .container {
             background: rgba(255, 255, 255, 0.1);
             padding: 40px;
             border-radius: 20px;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 5;
+            position: relative;
+            max-width: 90vw;
         }
+
         h1 { margin-bottom: 30px; font-size: 2rem; }
         #colorDisplay {
             font-size: 3rem;
@@ -32,63 +66,83 @@
             color: #fff;
             text-shadow: 0 0 10px rgba(0,0,0,0.3);
         }
+
+        /* ✅ الزر غير نشط — مش بيوصل لأي صفحة */
         button {
-            background: #ff6b6b;
-            color: white;
+            background: #ccc;
+            color: #666;
             border: none;
             padding: 15px 40px;
             font-size: 1.2rem;
             border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            cursor: not-allowed;
             font-weight: bold;
-        }
-        button:hover {
-            background: #ff5252;
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+            z-index: 5;
+            position: relative;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>الصفحة 1 من 11 — ابدأ اللعبة!</h1>
-        <div id="colorDisplay">اضغط على الزر!</div>
-        <button id="watchBtn">Watch</button>
+
+    <!-- ⬆️ البنر العلوي — الكود الأول الجديد اللي بعته -->
+    <div class="ad-banner top">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : 'dab20a2977afc3f070a74646e5a7975f',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/dab20a2977afc3f070a74646e5a7975f/invoke.js"></script>
     </div>
 
-    <script>
-        const colors = [
-            "أحمر", "أزرق", "أخضر", "أصفر", "وردي", 
-            "بنفسجي", "برتقالي", "سماوي", "أسود", "أبيض",
-            "رمادي", "بني", "ذهبي", "فضي", "زيتوني"
-        ];
+    <!-- 💥 محتوى اللعبة — في المنتصف -->
+    <div class="container">
+        <h1>الصفحة 2 من 10 — اللون الثاني!</h1>
+        <div id="colorDisplay">جارٍ التحميل...</div>
+        <button id="watchBtn" disabled>Watch</button> <!-- ✅ مش شغال -->
+    </div>
 
-        const watchBtn = document.getElementById('watchBtn');
+    <!-- ⬇️ البنر السفلي — الكود التاني الجديد اللي بعته -->
+    <div class="ad-banner bottom">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '4b9113cb9ab4edba9db796473defc31e',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/4b9113cb9ab4edba9db796473defc31e/invoke.js"></script>
+    </div>
+
+    <!-- 🎮 السكريبت — يقرأ اللون المحفوظ من الصفحة اللي فاتت ويتلون به -->
+    <script>
+        const gradients = {
+            "أحمر": "linear-gradient(135deg, #ff6b6b, #ee5a52)",
+            "أزرق": "linear-gradient(135deg, #4facfe, #00f2fe)",
+            "أخضر": "linear-gradient(135deg, #00b09b, #96c93d)",
+            "أصفر": "linear-gradient(135deg, #f093fb, #f5576c)",
+            "وردي": "linear-gradient(135deg, #fad0c4, #ff9a9e)",
+            "بنفسجي": "linear-gradient(135deg, #a18cd1, #fbc2eb)",
+            "default": "linear-gradient(135deg, #667eea, #764ba2)"
+        };
+
         const colorDisplay = document.getElementById('colorDisplay');
 
-        watchBtn.addEventListener('click', () => {
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            colorDisplay.textContent = randomColor;
-            document.body.style.background = getRandomGradient(randomColor);
-
-            setTimeout(() => {
-                window.location.href = "page3.html"; // 👉 الصفحة التانية
-            }, 1500);
+        // 👇 أول ما الصفحة تفتح — نقرأ اللون اللي اتحفظ من الصفحة اللي فاتت (page1.html)
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedColor = localStorage.getItem('nextPageColor') || "default";
+            document.body.style.background = gradients[savedColor] || gradients["default"];
+            colorDisplay.textContent = savedColor === "default" ? "لم يتم تحديد لون" : savedColor;
         });
 
-        function getRandomGradient(colorName) {
-            const gradients = {
-                "أحمر": "linear-gradient(135deg, #ff6b6b, #ee5a52)",
-                "أزرق": "linear-gradient(135deg, #4facfe, #00f2fe)",
-                "أخضر": "linear-gradient(135deg, #00b09b, #96c93d)",
-                "أصفر": "linear-gradient(135deg, #f093fb, #f5576c)",
-                "وردي": "linear-gradient(135deg, #fad0c4, #ff9a9e)",
-                "بنفسجي": "linear-gradient(135deg, #a18cd1, #fbc2eb)",
-                "default": "linear-gradient(135deg, #667eea, #764ba2)"
-            };
-            return gradients[colorName] || gradients["default"];
-        }
+        // ✅ الزر مش مربوط بأي وظيفة — الصفحة ثابتة
     </script>
+
 </body>
 </html>
