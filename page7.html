@@ -3,26 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ابدأ اللعبة — صفحة 1</title>
+    <title>الصفحة 7 — لون ثابت!</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            /* ✅ لون ثابت — بنفسجي */
+            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
             margin: 0;
             color: white;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
         }
+
+        .ad-banner {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            background: rgba(0,0,0,0.05);
+            z-index: 10;
+            position: absolute;
+        }
+
+        .ad-banner.top {
+            top: 0;
+        }
+
+        .ad-banner.bottom {
+            bottom: 0;
+            padding: 15px 0;
+        }
+
+        /* نخلي البنرات متجاوبة */
+        .ad-banner div,
+        .ad-banner script + div,
+        .ad-banner iframe {
+            max-width: 95vw;
+            width: 100%;
+            height: auto;
+        }
+
         .container {
             background: rgba(255, 255, 255, 0.1);
             padding: 40px;
             border-radius: 20px;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 5;
+            position: relative;
+            max-width: 90vw;
         }
+
         h1 { margin-bottom: 30px; font-size: 2rem; }
         #colorDisplay {
             font-size: 3rem;
@@ -32,6 +68,7 @@
             color: #fff;
             text-shadow: 0 0 10px rgba(0,0,0,0.3);
         }
+
         button {
             background: #ff6b6b;
             color: white;
@@ -42,7 +79,10 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: bold;
+            z-index: 5;
+            position: relative;
         }
+
         button:hover {
             background: #ff5252;
             transform: scale(1.05);
@@ -51,44 +91,34 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>الصفحة 1 من 11 — ابدأ اللعبة!</h1>
-        <div id="colorDisplay">اضغط على الزر!</div>
-        <button id="watchBtn">Watch</button>
+
+    <!-- ⬆️ البنر العلوي — RevenueGate -->
+    <div class="ad-banner top">
+        <script async="async" data-cfasync="false" src="//pl27617103.revenuecpmgate.com/36968b3fee95c7447e69b3b38e3ff985/invoke.js"></script>
+        <div id="container-36968b3fee95c7447e69b3b38e3ff985"></div>
     </div>
 
-    <script>
-        const colors = [
-            "أحمر", "أزرق", "أخضر", "أصفر", "وردي", 
-            "بنفسجي", "برتقالي", "سماوي", "أسود", "أبيض",
-            "رمادي", "بني", "ذهبي", "فضي", "زيتوني"
-        ];
+    <!-- 💥 محتوى الصفحة — في المنتصف -->
+    <div class="container">
+        <h1>الصفحة 7 من 11</h1>
+        <div id="colorDisplay">بنفسجي</div> <!-- ✅ اسم اللون الثابت -->
+        <button id="watchBtn">Watch</button> <!-- ✅ الزر شغال — ينقل لـ page8.html -->
+    </div>
 
+    <!-- ⬇️ البنر السفلي — RevenueGate -->
+    <div class="ad-banner bottom">
+        <script type='text/javascript' src='//pl27617146.revenuecpmgate.com/13/13/30/1313308e7f742a18c72c3f9aae3dcd92.js'></script>
+    </div>
+
+    <!-- 🎮 السكريبت — الزر ينقل لـ page8.html -->
+    <script>
         const watchBtn = document.getElementById('watchBtn');
-        const colorDisplay = document.getElementById('colorDisplay');
 
         watchBtn.addEventListener('click', () => {
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            colorDisplay.textContent = randomColor;
-            document.body.style.background = getRandomGradient(randomColor);
-
-            setTimeout(() => {
-                window.location.href = "page8.html"; // 👉 الصفحة التانية
-            }, 1500);
+            // ✅ ينقل مباشرة لـ page8.html — بدون تأخير — بدون تغيير لون
+            window.location.href = "page8.html";
         });
-
-        function getRandomGradient(colorName) {
-            const gradients = {
-                "أحمر": "linear-gradient(135deg, #ff6b6b, #ee5a52)",
-                "أزرق": "linear-gradient(135deg, #4facfe, #00f2fe)",
-                "أخضر": "linear-gradient(135deg, #00b09b, #96c93d)",
-                "أصفر": "linear-gradient(135deg, #f093fb, #f5576c)",
-                "وردي": "linear-gradient(135deg, #fad0c4, #ff9a9e)",
-                "بنفسجي": "linear-gradient(135deg, #a18cd1, #fbc2eb)",
-                "default": "linear-gradient(135deg, #667eea, #764ba2)"
-            };
-            return gradients[colorName] || gradients["default"];
-        }
     </script>
+
 </body>
 </html>
