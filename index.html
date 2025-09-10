@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2); /* لون ثابت */
+            background: linear-gradient(135deg, #667eea, #764ba2); /* لون ثابت — هيتم تغييره باللون المحفوظ */
             margin: 0;
             color: white;
             text-align: center;
@@ -17,6 +17,7 @@
             align-items: center;
             min-height: 100vh;
             position: relative;
+            transition: background 0.6s ease;
         }
 
         .ad-banner {
@@ -35,6 +36,12 @@
 
         .ad-banner.bottom {
             bottom: 0;
+            padding: 15px 0;
+        }
+
+        .ad-banner iframe {
+            max-width: 95vw;
+            height: auto;
         }
 
         .container {
@@ -79,7 +86,7 @@
 </head>
 <body>
 
-    <!-- ⬆️ البنر العلوي — اللي بعته دلوقتي (height:60, width:468) -->
+    <!-- ⬆️ البنر العلوي -->
     <div class="ad-banner top">
         <script type="text/javascript">
             atOptions = {
@@ -95,18 +102,26 @@
 
     <!-- 💥 محتوى اللعبة — في المنتصف -->
     <div class="container">
-        <h1>الصفحة 1 من 11 — ابدأ اللعبة!</h1>
-        <div id="colorDisplay">اضغط على الزر!</div>
+        <h1>الصفحة 1 من 10 — استمر في اللعبة!</h1>
+        <div id="colorDisplay">جارٍ التحميل...</div>
         <button id="watchBtn">Watch</button>
     </div>
 
-    <!-- ⬇️ مكان البنر السفلي — هتستبدله لما تبعت الكود -->
-    <div class="ad-banner bottom" id="bottomBannerPlaceholder">
-        <!-- ⚠️ هتستبدل هذا المكان بالبنر التاني لما تبعته -->
-        <p style="color:#ccc; font-size:12px;">[مكان البنر السفلي — سيتم استبداله]</p>
+    <!-- ⬇️ البنر السفلي — محطوط فعليًا — مش فيه أي placeholder -->
+    <div class="ad-banner bottom">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '18e4ca82be7a22ececc4c215e25ef295',
+                'format' : 'iframe',
+                'height' : 300,
+                'width' : 160,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/18e4ca82be7a22ececc4c215e25ef295/invoke.js"></script>
     </div>
 
-    <!-- 🎮 السكريبت — يختار لون ويحفظه للصفحة الجاية -->
+    <!-- 🎮 السكريبت — يقرأ اللون من الصفحة السابقة (index.html ما بتحفظش لون — فبيستخدم لون عشوائي أول مرة) -->
     <script>
         const colors = [
             "أحمر", "أزرق", "أخضر", "أصفر", "وردي", 
@@ -125,16 +140,21 @@
         };
 
         const watchBtn = document.getElementById('watchBtn');
+        const colorDisplay = document.getElementById('colorDisplay');
 
-        watchBtn.addEventListener('click', () => {
-            // اختيار لون عشوائي
+        // 👇 أول ما الصفحة تفتح — نختار لون عشوائي مباشر (لأن index.html ما حفظش لون)
+        window.addEventListener('DOMContentLoaded', () => {
             const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.background = gradients[randomColor] || gradients["default"];
+            colorDisplay.textContent = randomColor;
+            localStorage.setItem('nextPageColor', randomColor); // نحفظه عشان الصفحة الجاية
+        });
 
-            // حفظه للصفحة التالية
+        // 👇 لما يضغط على الزر — يختار لون جديد ويحفظه للصفحة اللي بعدها
+        watchBtn.addEventListener('click', () => {
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
             localStorage.setItem('nextPageColor', randomColor);
-
-            // الانتقال المباشر للصفحة التالية
-            window.location.href = "page2.html"; // 👉 هتعدلها لما تبعتلي كود الصفحة التانية
+            window.location.href = "page2.html"; // 👉 الصفحة التانية
         });
     </script>
 
