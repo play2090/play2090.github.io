@@ -67,25 +67,31 @@
             text-shadow: 0 0 10px rgba(0,0,0,0.3);
         }
 
-        /* ✅ الزر غير نشط — مش بيوصل لأي صفحة */
+        /* ✅ الزر شغال — لونه أصلي — ومؤثرات hover */
         button {
-            background: #ccc;
-            color: #666;
+            background: #ff6b6b;
+            color: white;
             border: none;
             padding: 15px 40px;
             font-size: 1.2rem;
             border-radius: 50px;
-            cursor: not-allowed;
+            cursor: pointer;
+            transition: all 0.3s ease;
             font-weight: bold;
             z-index: 5;
             position: relative;
-            opacity: 0.7;
+        }
+
+        button:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
         }
     </style>
 </head>
 <body>
 
-    <!-- ⬆️ البنر العلوي — الكود الأول الجديد اللي بعته -->
+    <!-- ⬆️ البنر العلوي -->
     <div class="ad-banner top">
         <script type="text/javascript">
             atOptions = {
@@ -103,10 +109,10 @@
     <div class="container">
         <h1>الصفحة 2 من 10 — اللون الثاني!</h1>
         <div id="colorDisplay">جارٍ التحميل...</div>
-        <button id="watchBtn" disabled>Watch</button> <!-- ✅ مش شغال -->
+        <button id="watchBtn">Watch</button> <!-- ✅ شغال — مش disabled -->
     </div>
 
-    <!-- ⬇️ البنر السفلي — الكود التاني الجديد اللي بعته -->
+    <!-- ⬇️ البنر السفلي -->
     <div class="ad-banner bottom">
         <script type="text/javascript">
             atOptions = {
@@ -120,7 +126,7 @@
         <script type="text/javascript" src="//www.highperformanceformat.com/4b9113cb9ab4edba9db796473defc31e/invoke.js"></script>
     </div>
 
-    <!-- 🎮 السكريبت — يقرأ اللون المحفوظ من الصفحة اللي فاتت ويتلون به -->
+    <!-- 🎮 السكريبت — يقرأ اللون ويتلون به — والزر ينقل لـ page3.html -->
     <script>
         const gradients = {
             "أحمر": "linear-gradient(135deg, #ff6b6b, #ee5a52)",
@@ -132,6 +138,7 @@
             "default": "linear-gradient(135deg, #667eea, #764ba2)"
         };
 
+        const watchBtn = document.getElementById('watchBtn');
         const colorDisplay = document.getElementById('colorDisplay');
 
         // 👇 أول ما الصفحة تفتح — نقرأ اللون اللي اتحفظ من الصفحة اللي فاتت (page1.html)
@@ -141,7 +148,10 @@
             colorDisplay.textContent = savedColor === "default" ? "لم يتم تحديد لون" : savedColor;
         });
 
-        // ✅ الزر مش مربوط بأي وظيفة — الصفحة ثابتة
+        // 👇 لما يضغط على الزر — ينقل لـ page3.html — بدون تغيير أو حفظ جديد
+        watchBtn.addEventListener('click', () => {
+            window.location.href = "page3.html"; // ✅ الصفحة اللي بعدها — page3.html
+        });
     </script>
 
 </body>
