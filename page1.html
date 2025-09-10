@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ابدأ اللعبة — صفحة 1</title>
+    <title>الصفحة 1 — اللون الأول!</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #667eea, #764ba2); /* هيتم تغييره فورًا للون الثابت */
             margin: 0;
             color: white;
             text-align: center;
@@ -17,6 +17,7 @@
             align-items: center;
             min-height: 100vh;
             position: relative;
+            transition: background 0.5s ease;
         }
 
         .ad-banner {
@@ -29,18 +30,11 @@
             position: absolute;
         }
 
-        .ad-banner.top {
-            top: 0;
-        }
+        .ad-banner.top { top: 0; }
+        .ad-banner.bottom { bottom: 0; padding: 15px 0; }
 
-        .ad-banner.bottom {
-            bottom: 0;
-            padding: 15px 0;
-        }
-
-        /* ستايل خاص للبنر الطولي — نخليه ما يعديش حدود الشاشة */
-        .ad-banner.bottom iframe {
-            max-width: 90vw;
+        .ad-banner iframe {
+            max-width: 95vw;
             height: auto;
         }
 
@@ -86,7 +80,7 @@
 </head>
 <body>
 
-    <!-- ⬆️ البنر العلوي — الأول اللي بعته (60x468) -->
+    <!-- ⬆️ البنر العلوي -->
     <div class="ad-banner top">
         <script type="text/javascript">
             atOptions = {
@@ -100,14 +94,14 @@
         <script type="text/javascript" src="//www.highperformanceformat.com/a2725a2a9d0cd23fab4c37659ec2f836/invoke.js"></script>
     </div>
 
-    <!-- 💥 محتوى اللعبة — في المنتصف -->
+    <!-- 💥 محتوى اللعبة -->
     <div class="container">
-        <h1>الصفحة 1 من 11 — ابدأ اللعبة!</h1>
-        <div id="colorDisplay">اضغط على الزر!</div>
+        <h1>الصفحة 1 من 10 — اللون الأول!</h1>
+        <div id="colorDisplay">جارٍ التحميل...</div>
         <button id="watchBtn">Watch</button>
     </div>
 
-    <!-- ⬇️ البنر السفلي — التاني اللي بعته (300x160) -->
+    <!-- ⬇️ البنر السفلي -->
     <div class="ad-banner bottom">
         <script type="text/javascript">
             atOptions = {
@@ -121,14 +115,9 @@
         <script type="text/javascript" src="//www.highperformanceformat.com/18e4ca82be7a22ececc4c215e25ef295/invoke.js"></script>
     </div>
 
-    <!-- 🎮 السكريبت — يختار لون ويحفظه للصفحة الجاية -->
+    <!-- 🎮 السكريبت — يعرض لون ثابت (أحمر) → يحفظه → الزر ينقل لـ page2.html -->
     <script>
-        const colors = [
-            "أحمر", "أزرق", "أخضر", "أصفر", "وردي", 
-            "بنفسجي", "برتقالي", "سماوي", "أسود", "أبيض",
-            "رمادي", "بني", "ذهبي", "فضي", "زيتوني"
-        ];
-
+        // 👇 تعريف الألوان والجراديانت
         const gradients = {
             "أحمر": "linear-gradient(135deg, #ff6b6b, #ee5a52)",
             "أزرق": "linear-gradient(135deg, #4facfe, #00f2fe)",
@@ -140,16 +129,22 @@
         };
 
         const watchBtn = document.getElementById('watchBtn');
+        const colorDisplay = document.getElementById('colorDisplay');
 
+        // 👇 أول ما الصفحة تفتح — نعرض لون ثابت (مثلاً: "أحمر")
+        window.addEventListener('DOMContentLoaded', () => {
+            const fixedColor = "أحمر"; // ✅ هنا تقدر تغيره لأي لون تريده: "أزرق"، "بنفسجي"، إلخ
+
+            document.body.style.background = gradients[fixedColor] || gradients["default"];
+            colorDisplay.textContent = fixedColor;
+
+            // نحفظ اللون الثابت للصفحة التالية
+            localStorage.setItem('nextPageColor', fixedColor);
+        });
+
+        // 👇 لما يضغط على الزر — ينقل مباشرة لـ page2.html — بدون تغيير لون
         watchBtn.addEventListener('click', () => {
-            // اختيار لون عشوائي
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-
-            // حفظه للصفحة التالية
-            localStorage.setItem('nextPageColor', randomColor);
-
-            // الانتقال المباشر للصفحة التالية
-            window.location.href = "page2.html"; // 👉 هتعدلها لما تبعتلي كود الصفحة التانية
+            window.location.href = "page2.html"; // 👉 الصفحة التالتة في التسلسل
         });
     </script>
 
