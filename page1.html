@@ -8,21 +8,53 @@
         body {
             font-family: 'Segoe UI', Tahoma, sans-serif;
             background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
             color: white;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
         }
+
+        .ad-banner {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 8px 0;
+            background: rgba(0,0,0,0.05);
+            z-index: 10;
+            position: absolute;
+        }
+
+        .ad-banner.top {
+            top: 0;
+        }
+
+        .ad-banner.bottom {
+            bottom: 0;
+            padding: 15px 0;
+        }
+
+        /* ستايل خاص للبنر الطولي — نخليه ما يعديش حدود الشاشة */
+        .ad-banner.bottom iframe {
+            max-width: 90vw;
+            height: auto;
+        }
+
         .container {
             background: rgba(255, 255, 255, 0.1);
             padding: 40px;
             border-radius: 20px;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 5;
+            position: relative;
+            max-width: 90vw;
         }
+
         h1 { margin-bottom: 30px; font-size: 2rem; }
         #colorDisplay {
             font-size: 3rem;
@@ -42,6 +74,8 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: bold;
+            z-index: 5;
+            position: relative;
         }
         button:hover {
             background: #ff5252;
@@ -51,12 +85,43 @@
     </style>
 </head>
 <body>
+
+    <!-- ⬆️ البنر العلوي — الأول اللي بعته (60x468) -->
+    <div class="ad-banner top">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : 'a2725a2a9d0cd23fab4c37659ec2f836',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 300,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/a2725a2a9d0cd23fab4c37659ec2f836/invoke.js"></script>
+    </div>
+
+    <!-- 💥 محتوى اللعبة — في المنتصف -->
     <div class="container">
         <h1>الصفحة 1 من 11 — ابدأ اللعبة!</h1>
         <div id="colorDisplay">اضغط على الزر!</div>
         <button id="watchBtn">Watch</button>
     </div>
 
+    <!-- ⬇️ البنر السفلي — التاني اللي بعته (300x160) -->
+    <div class="ad-banner bottom">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '18e4ca82be7a22ececc4c215e25ef295',
+                'format' : 'iframe',
+                'height' : 60,
+                'width' : 300,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/18e4ca82be7a22ececc4c215e25ef295/invoke.js"></script>
+    </div>
+
+    <!-- 🎮 السكريبت — يختار لون ويحفظه للصفحة الجاية -->
     <script>
         const colors = [
             "أحمر", "أزرق", "أخضر", "أصفر", "وردي", 
@@ -64,31 +129,29 @@
             "رمادي", "بني", "ذهبي", "فضي", "زيتوني"
         ];
 
+        const gradients = {
+            "أحمر": "linear-gradient(135deg, #ff6b6b, #ee5a52)",
+            "أزرق": "linear-gradient(135deg, #4facfe, #00f2fe)",
+            "أخضر": "linear-gradient(135deg, #00b09b, #96c93d)",
+            "أصفر": "linear-gradient(135deg, #f093fb, #f5576c)",
+            "وردي": "linear-gradient(135deg, #fad0c4, #ff9a9e)",
+            "بنفسجي": "linear-gradient(135deg, #a18cd1, #fbc2eb)",
+            "default": "linear-gradient(135deg, #667eea, #764ba2)"
+        };
+
         const watchBtn = document.getElementById('watchBtn');
-        const colorDisplay = document.getElementById('colorDisplay');
 
         watchBtn.addEventListener('click', () => {
+            // اختيار لون عشوائي
             const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            colorDisplay.textContent = randomColor;
-            document.body.style.background = getRandomGradient(randomColor);
 
-            setTimeout(() => {
-                window.location.href = "page2.html"; // 👉 الصفحة التانية
-            }, 1500);
+            // حفظه للصفحة التالية
+            localStorage.setItem('nextPageColor', randomColor);
+
+            // الانتقال المباشر للصفحة التالية
+            window.location.href = "page2.html"; // 👉 هتعدلها لما تبعتلي كود الصفحة التانية
         });
-
-        function getRandomGradient(colorName) {
-            const gradients = {
-                "أحمر": "linear-gradient(135deg, #ff6b6b, #ee5a52)",
-                "أزرق": "linear-gradient(135deg, #4facfe, #00f2fe)",
-                "أخضر": "linear-gradient(135deg, #00b09b, #96c93d)",
-                "أصفر": "linear-gradient(135deg, #f093fb, #f5576c)",
-                "وردي": "linear-gradient(135deg, #fad0c4, #ff9a9e)",
-                "بنفسجي": "linear-gradient(135deg, #a18cd1, #fbc2eb)",
-                "default": "linear-gradient(135deg, #667eea, #764ba2)"
-            };
-            return gradients[colorName] || gradients["default"];
-        }
     </script>
+
 </body>
 </html>
