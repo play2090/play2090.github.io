@@ -40,11 +40,9 @@
         }
 
         /* نخلي البنرات متجاوبة */
-        .ad-banner div,
-        .ad-banner script + div,
         .ad-banner iframe {
             max-width: 95vw;
-            width: 100%;
+            width: auto;
             height: auto;
         }
 
@@ -92,10 +90,18 @@
 </head>
 <body>
 
-    <!-- ⬆️ البنر العلوي — RevenueGate -->
+    <!-- ⬆️ البنر العلوي — مستبدل بـ highperformanceformat.com (250x300) -->
     <div class="ad-banner top">
-        <script async="async" data-cfasync="false" src="//pl27617103.revenuecpmgate.com/36968b3fee95c7447e69b3b38e3ff985/invoke.js"></script>
-        <div id="container-36968b3fee95c7447e69b3b38e3ff985"></div>
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '5a5968d4516bb25a187f0a576362fc07',
+                'format' : 'iframe',
+                'height' : 250,
+                'width' : 300,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/5a5968d4516bb25a187f0a576362fc07/invoke.js"></script>
     </div>
 
     <!-- 💥 محتوى الصفحة — في المنتصف -->
@@ -105,7 +111,7 @@
         <button id="watchBtn">Watch</button> <!-- ✅ الزر شغال — ينقل لـ page8.html -->
     </div>
 
-    <!-- ⬇️ البنر السفلي — RevenueGate -->
+    <!-- ⬇️ البنر السفلي — RevenueGate — باقي زي ما هو -->
     <div class="ad-banner bottom">
         <script type='text/javascript' src='//pl27617146.revenuecpmgate.com/13/13/30/1313308e7f742a18c72c3f9aae3dcd92.js'></script>
     </div>
