@@ -20,32 +20,6 @@
             transition: background 0.5s ease;
         }
 
-        .ad-banner {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            padding: 8px 0;
-            background: rgba(0,0,0,0.05);
-            z-index: 10;
-            position: absolute;
-        }
-
-        .ad-banner.top {
-            top: 0;
-        }
-
-        .ad-banner.bottom {
-            bottom: 0;
-            padding: 15px 0;
-        }
-
-        /* نخلي البنر السفلي متجاوب لو كان كبير */
-        .ad-banner iframe {
-            max-width: 95vw;
-            width: 100%;
-            height: auto;
-        }
-
         .container {
             background: rgba(255, 255, 255, 0.1);
             padding: 40px;
@@ -67,7 +41,6 @@
             text-shadow: 0 0 10px rgba(0,0,0,0.3);
         }
 
-        /* ✅ الزر شغال — لونه أصلي — ومؤثرات hover */
         button {
             background: #ff6b6b;
             color: white;
@@ -91,42 +64,30 @@
 </head>
 <body>
 
-    <!-- ⬆️ البنر العلوي -->
-    <div class="ad-banner top">
-        <script type="text/javascript">
-            atOptions = {
-                'key' : 'dab20a2977afc3f070a74646e5a7975f',
-                'format' : 'iframe',
-                'height' : 50,
-                'width' : 320,
-                'params' : {}
-            };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/dab20a2977afc3f070a74646e5a7975f/invoke.js"></script>
-    </div>
+    <!-- ⬆️ إعلان فوق -->
+    <script>
+        (function(s){
+            s.dataset.zone='9876303',
+            s.src='https://gizokraijaw.net/vignette.min.js'
+        })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
+    </script>
 
-    <!-- 💥 محتوى اللعبة — في المنتصف -->
+    <!-- 💥 محتوى اللعبة -->
     <div class="container">
         <h1>الصفحة 2 من 10 — اللون الثاني!</h1>
         <div id="colorDisplay">جارٍ التحميل...</div>
-        <button id="watchBtn">Watch</button> <!-- ✅ شغال — مش disabled -->
+        <button id="watchBtn">Watch</button>
     </div>
 
-    <!-- ⬇️ البنر السفلي -->
-    <div class="ad-banner bottom">
-        <script type="text/javascript">
-            atOptions = {
-                'key' : '4b9113cb9ab4edba9db796473defc31e',
-                'format' : 'iframe',
-                'height' : 90,
-                'width' : 728,
-                'params' : {}
-            };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/4b9113cb9ab4edba9db796473defc31e/invoke.js"></script>
-    </div>
+    <!-- ⬇️ إعلان تحت -->
+    <script>
+        (function(s){
+            s.dataset.zone='9876309',
+            s.src='https://gizokraijaw.net/vignette.min.js'
+        })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
+    </script>
 
-    <!-- 🎮 السكريبت — يقرأ اللون ويتلون به — والزر ينقل لـ page3.html -->
+    <!-- 🎮 السكريبت -->
     <script>
         const gradients = {
             "أحمر": "linear-gradient(135deg, #ff6b6b, #ee5a52)",
@@ -141,16 +102,14 @@
         const watchBtn = document.getElementById('watchBtn');
         const colorDisplay = document.getElementById('colorDisplay');
 
-        // 👇 أول ما الصفحة تفتح — نقرأ اللون اللي اتحفظ من الصفحة اللي فاتت (page1.html)
         window.addEventListener('DOMContentLoaded', () => {
             const savedColor = localStorage.getItem('nextPageColor') || "default";
             document.body.style.background = gradients[savedColor] || gradients["default"];
             colorDisplay.textContent = savedColor === "default" ? "لم يتم تحديد لون" : savedColor;
         });
 
-        // 👇 لما يضغط على الزر — ينقل لـ page3.html — بدون تغيير أو حفظ جديد
         watchBtn.addEventListener('click', () => {
-            window.location.href = "page3.html"; // ✅ الصفحة اللي بعدها — page3.html
+            window.location.href = "page3.html";
         });
     </script>
 
